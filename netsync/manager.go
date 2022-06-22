@@ -877,8 +877,8 @@ func (sm *SyncManager) handleBlockMsg(bmsg *blockMsg) {
 	locator := blockchain.BlockLocator([]*chainhash.Hash{blockHash})
 	err = peer.PushGetBlocksMsg(locator, &zeroHash)
 	if err != nil {
-		log.Warnf("Failed to send getheaders message to "+
-			"peer %s: %v", peer.Addr(), err)
+		log.Warnf("Failed to send getblocks message to peer %s: %v",
+			peer.Addr(), err)
 		return
 	}
 }
@@ -1051,8 +1051,8 @@ func (sm *SyncManager) handleHeadersMsg(hmsg *headersMsg) {
 	locator := blockchain.BlockLocator([]*chainhash.Hash{finalHash})
 	err := peer.PushGetHeadersMsg(locator, sm.nextCheckpoint.Hash)
 	if err != nil {
-		log.Warnf("Failed to send getblocks message to peer %s: %v",
-			peer.Addr(), err)
+		log.Warnf("Failed to send getheaders message to "+
+			"peer %s: %v", peer.Addr(), err)
 		return
 	}
 }
