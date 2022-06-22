@@ -875,11 +875,10 @@ func (sm *SyncManager) handleBlockMsg(bmsg *blockMsg) {
 	sm.headerList.Init()
 	log.Infof("Reached the final checkpoint -- switching to normal mode")
 	locator := blockchain.BlockLocator([]*chainhash.Hash{blockHash})
-	log.Infof("asking for blocks here")
 	err = peer.PushGetBlocksMsg(locator, &zeroHash)
 	if err != nil {
-		log.Warnf("Failed to send getblocks message to peer %s: %v",
-			peer.Addr(), err)
+		log.Warnf("Failed to send getheaders message to "+
+			"peer %s: %v", peer.Addr(), err)
 		return
 	}
 }
